@@ -18,9 +18,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^v1/users$', include('user.urls')),
-    url(r'^v1/tours$', include('tour.urls')),
-    url(r'^v1/hotels$', include('hotel.urls')),
-    url(r'^v1/topics$', include('introduction.urls')),
-    url(r'^v1/community$', include('community.urls')),
+    url(r'^v1/users', include('user.urls')),
+    url(r'^v1/tours', include('tour.urls')),
+    url(r'^v1/hotels', include('hotel.urls')),
+    url(r'^v1/topics', include('introduction.urls')),
+    url(r'^v1/community', include('community.urls')),
 ]

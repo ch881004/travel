@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -26,7 +25,7 @@ SECRET_KEY = 'o5@cn*_m%_7_ecc2_muq@-v&6wc_wx#_jw2kr*nwkjgj4&m^=='
 DEBUG = True
 
 ALLOWED_HOSTS = []
-AUTH_USER_MODEL='user.UserProfile'
+AUTH_USER_MODEL = 'user.UserProfile'
 
 # Application definition
 
@@ -61,7 +60,7 @@ ROOT_URLCONF = 'travel.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'travel.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -90,7 +88,6 @@ DATABASES = {
         'PASSWORD': '123456'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -110,20 +107,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -149,7 +144,9 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
 )
 
-#这里指的是 当子路是media时表示访问媒体资源
-MEDIA_URL='/media/'
-#尽管如此,需要告诉django,具体的文件夹路径到底是哪里,所以下面写的是文件夹的绝对路径
-MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
+# 这里指的是 当子路是media时表示访问媒体资源
+MEDIA_URL = '/media/'
+# 尽管如此,需要告诉django,具体的文件夹路径到底是哪里,所以下面写的是文件夹的绝对路径
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+APPEND_SLASH = False
