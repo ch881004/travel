@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+    <form action="register" method="post">
+        {% csrf_token %}
+        <div>
+            用户名: <input type="text" name="username">
+        </div>
+        <div>
+            密码: <input type="text" name="password">
+        </div>
+        <div>
+            用户类型: <select name="usertype">
+                        <option value="1">普通用户</option>
+                        <option value="2">酒店</option>
+                        <option value="3">旅游景点</option>
+                    </select>
+        </div>
+        <div>{{ msg }}</div>
+        <div>
+            <button type="submit">注册</button>
+        </div>
+    </form>
+</body>
+</html>

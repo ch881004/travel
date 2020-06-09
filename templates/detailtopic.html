@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>攻略详情</title>
+</head>
+<body>
+    <div>
+<!--        游记标题-->
+        <h2>{{ topic.title }}</h2>
+    </div>
+    <div>
+        <p>发布时间：{{ topic.create_time }}</p>
+        <p>发布人：{{ user.username }}</p>
+    </div>
+    <div >
+        <img style="width: 1000px;height: 200px;" src="/media/{{ topic.image }}" alt="{{ topic.image }}">
+    </div>
+    <div>
+<!--        游记内容-->
+        <p>{{ topic.info }}</p>
+    </div>
+
+    <div>
+        {% if previous_id is None %}
+        <p></p>
+        {% else %}
+            {% if is_login %}
+            <h3><a href="{{ previous_id }}?username={{ user.username }}">上一篇:{{ previous_title }}</a></h3>
+            {% else %}
+             <h3><a href="{{ previous_id }}">上一篇:{{ previous_title }}</a></h3>
+            {% endif%}
+        {% endif %}
+    </div>
+    <div>
+        {% if next_id is None %}
+        <p></p>
+        {% else %}
+            {% if is_login %}
+             <h3><a href="{{ next_id }}?username={{ user.username }}">下一篇:{{ next_title }}</a></h3>
+            {% else %}
+             <h3><a href="{{ next_id }}">下一篇:{{ next_title }}</a></h3>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

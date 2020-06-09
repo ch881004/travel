@@ -6,15 +6,73 @@
 </head>
 <body>
     <div>
-        <p>游记标题</p>
+        <b><a href="{{ username }}/add">发布游记</a></b>
     </div>
 
-    <div>
-        <p>游记简介</p>
-    </div>
+    <table>
+        <tr>
+            <th>
+                <b>攻略logo</b>
+            </th>
+            <th>
+                <b>攻略简介</b>
+            </th>
+            <th>
+                <b>发布时间</b>
+            </th>
+            <th>
+                <b>发布人</b>
+            </th>
+            <th>
+                <b>浏览次数</b>
+            </th>
+            <th>
+                <b>修改</b>
+            </th>
+            <th>
+                <b>删除</b>
+            </th>
+        </tr>
 
-    <div>
-        <p>游记内容</p>
-    </div>
+        {% for topic in page %}
+        <tr>
+            <td colspan="5">
+                <b><a href="detail/{{ topic.id }}?username={{ username }}">{{ topic.title }}</a></b>
+            </td>
+        </tr>
+        <tr>
+            <td><img style="width:500px;height:200px;" src="/media/{{ topic.image }}" alt="{{ topic.image }}"></td>
+            <td>{{ topic.shortinfo }}</td>
+            <td>{{ topic.create_time }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ topic.see_count }}</td>
+
+            <td><a href="{{ username }}/mod/{{ topic.id }}">修改</a></td>
+            <td><a href="{{ username }}/del/{{ topic.id }}">删除</a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if page.has_previous %}
+    <b><a href="{{ username }}?page={{ page.previous_page_number }}">上一页</a></b>
+    {% else %}
+    <b>上一页</b>
+    {% endif %}
+
+    {% for p in paginator.page_range %}
+    {% if p == page.number %}
+    {{ p }}
+    {% else %}
+    <a href="{{ username }}?page={{ p }}">{{ p }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page.has_next %}
+    <b><a href="{{ username }}?page={{ page.next_page_number }}">下一页</a></b>
+    {% else %}
+    <b>下一页</b>
+    {% endif %}
+
 </body>
 </html>

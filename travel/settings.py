@@ -148,5 +148,4 @@ CORS_ALLOW_HEADERS = (
 MEDIA_URL = '/media/'
 # 尽管如此,需要告诉django,具体的文件夹路径到底是哪里,所以下面写的是文件夹的绝对路径
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 APPEND_SLASH = False
