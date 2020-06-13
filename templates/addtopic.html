@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>发布游记</title>
+    <title>发布攻略</title>
 </head>
 <body>
+    <a href="/">主页</a>
+    <hr>
     <form action="add" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
-            游记标题:<input type="text" name="title">
+            攻略标题:<input type="text" name="title">
         </div>
         <div>
-            搜索关键词:<input type="text" name="keywords">
+            搜索内容:<input type="text" name="keywords">
         </div>
         <div>
             地理位置:<input type="text" name="location">
         </div>
         <div>
-            游记内容: <textarea name="info" cols="60" rows="20"></textarea>
+            <label for="info" style="float:left;">攻略内容:</label>
+            <textarea id="info" name="info" cols="60" rows="20">{{ topic.info }}</textarea>
         </div>
         <div>
-            游记图片: <input type="file" name="image">
+            上传图片:<input type="file" name="image">
         </div>
         <div>
             <button type="submit">发布</button>

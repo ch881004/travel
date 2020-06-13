@@ -2,34 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>我的游记</title>
+    <title>我的攻略</title>
 </head>
 <body>
     <div>
-        <b><a href="{{ username }}/add">发布游记</a></b>
+        <b><a href="{{ username }}/add">发布攻略</a></b>&nbsp;&nbsp;<a href="/">主页</a>
     </div>
-
+    <hr>
     <table>
         <tr>
             <th>
-                <b>攻略logo</b>
+                <b></b>
             </th>
-            <th>
+            <th style="width:500px;padding:10px 50px 0px 50px;">
                 <b>攻略简介</b>
             </th>
-            <th>
+            <th style="width:150px;padding:10px 30px 0px 30px;">
                 <b>发布时间</b>
             </th>
-            <th>
+            <th style="width:100px;padding:10px 30px 0px 30px;">
                 <b>发布人</b>
             </th>
-            <th>
+            <th style="width:80px;padding:10px 30px 0px 30px;">
                 <b>浏览次数</b>
             </th>
-            <th>
+            <th style="width:80px;padding:10px 30px 0px 30px;">
                 <b>修改</b>
             </th>
-            <th>
+            <th style="width:80px;padding:10px 30px 0px 30px;">
                 <b>删除</b>
             </th>
         </tr>
@@ -42,13 +42,13 @@
         </tr>
         <tr>
             <td><img style="width:500px;height:200px;" src="/media/{{ topic.image }}" alt="{{ topic.image }}"></td>
-            <td>{{ topic.shortinfo }}</td>
-            <td>{{ topic.create_time }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ topic.see_count }}</td>
+            <td style="text-align:center;">{{ topic.shortinfo }}</td>
+            <td style="text-align:center;">{{ topic.create_time }}</td>
+            <td style="text-align:center;">{{ user.username }}</td>
+            <td style="text-align:center;">{{ topic.see_count }}</td>
 
-            <td><a href="{{ username }}/mod/{{ topic.id }}">修改</a></td>
-            <td><a href="{{ username }}/del/{{ topic.id }}">删除</a></td>
+            <td style="text-align:center;"><a href="{{ username }}/mod/{{ topic.id }}">修改</a></td>
+            <td style="text-align:center;"><a href="{{ username }}/del/{{ topic.id }}">删除</a></td>
 
         </tr>
         {% endfor %}

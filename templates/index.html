@@ -5,11 +5,91 @@
     <title>首页</title>
 </head>
 <body>
-    <dvi>
-        <b>注册成功!</b>
-    </dvi>
-    <div>
-        <a href='login'>前往登录</a>
-    </div>
+    {% if username is None %}
+    <a href='/v1/users/login'>登录</a>&nbsp;&nbsp;<a href='/v1/users/register'>注册</a>
+    {% else %}
+    <div><a href='/v1/topics/{{ username }}'>我的游记</a>&nbsp;&nbsp;<a href="/v1/users/logout">退出登录</a></div>
+    {% endif %}
+    <div><a href='/v1/topics'>全部攻略</a></div>
+    <form action="/v1/topics/search" method="get">
+<!--        {% csrf_token %}-->
+        <div>
+            <button type="submit">搜索：</button><input type="text" name="search_word" value="{{ search_word }}">
+        </div>
+    </form>
+
+    <hr>
+
+
+<table>
+        <tr>
+            <th>
+                <b></b>
+            </th>
+            <th style="width:500px;padding:10px 50px 0px 50px;">
+                <b>攻略简介</b>
+            </th>
+            <th style="width:150px;padding:10px 30px 0px 30px;">
+                <b>发布时间</b>
+            </th>
+            <th style="width:100px;padding:10px 30px 0px 30px;">
+                <b>发布人</b>
+            </th>
+            <th style="width:80px;padding:10px 30px 0px 30px;">
+                <b>浏览次数</b>
+            </th>
+        </tr>
+<!--        {% for keyword in keywords %}-->
+            {% for topic in page %}
+<!--                {% if keyword.titleid_id == topic.id %}-->
+                    <tr>
+                        <td colspan="5">
+                            <h3><a href="detail/{{ topic.id }}">{{ topic.title }}</a></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img style="width:500px;height:200px;" src="/media/{{ topic.image }}" alt="{{ topic.image }}"></td>
+                        <td style="text-align:center;">{{ topic.shortinfo }}</td>
+                        <td style="text-align:center;">{{ topic.create_time }}</td>
+                        {% for user in users %}
+                        {% if user.id == topic.userid_id %}
+                        <td style="text-align:center;">{{ user.username }}</td>
+                        {% endif %}
+                        {% endfor %}
+                        <td style="text-align:center;">{{ topic.see_count }}</td>
+                    </tr>
+<!--                    {% endif %}-->
+            {% endfor %}
+<!--        {% endfor %}-->
+    </table>
+
+
+
+
+
+    {% if page.has_previous %}
+    <b><a href="search?search_word={{ search_word }}&page={{ page.previous_page_number }}">上一页</a></b>
+    {% else %}
+     <b>上一页</b>
+    {% endif %}
+
+    {% for p in paginator.page_range %}
+    {% if p == page.number %}
+    {{ p }}
+    {% else %}
+    <a href="search?search_word={{ search_word }}&page={{ p }}">{{ p }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page.has_next %}
+     <b><a href="search?search_word={{ search_word }}&page={{ page.next_page_number }}">下一页</a></b>
+    {% else %}
+     <b>下一页</b>
+    {% endif %}
+
+
+
+
+
 </body>
 </html>

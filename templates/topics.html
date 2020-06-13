@@ -2,29 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>全部游记</title>
+    <title>全部攻略</title>
 </head>
 <body>
-    {% if username is None %}
-        <b><a href="users/login">登录</a></b>
-    {% else %}
-        <b><a href="topics/{{ username }}">我的游记</a></b>
-    {% endif %}
+    <div>
+        {% if username is None %}
+            <b><a href="users/login">登录</a></b>
+        {% else %}
+            <b><a href="topics/{{ username }}">我的攻略</a></b>
+        {% endif %}
+        <a href="/">主页</a>
+    </div>
+    <hr>
     <table>
         <tr>
             <th>
-                <b>攻略logo</b>
+                <b></b>
             </th>
-            <th>
+            <th style="width:500px;padding:10px 50px 0px 50px;">
                 <b>攻略简介</b>
             </th>
-            <th>
+            <th style="width:150px;padding:10px 30px 0px 30px;">
                 <b>发布时间</b>
             </th>
-            <th>
+            <th style="width:100px;padding:10px 30px 0px 30px;">
                 <b>发布人</b>
             </th>
-            <th>
+            <th style="width:80px;padding:10px 30px 0px 30px;">
                 <b>浏览次数</b>
             </th>
         </tr>
@@ -37,14 +41,14 @@
         </tr>
         <tr>
             <td><img style="width:500px;height:200px;" src="/media/{{ topic.image }}" alt="{{ topic.image }}"></td>
-            <td>{{ topic.shortinfo }}</td>
-            <td>{{ topic.create_time }}</td>
+            <td style="text-align:center;">{{ topic.shortinfo }}</td>
+            <td style="text-align:center;">{{ topic.create_time }}</td>
             {% for user in users %}
             {% if user.id == topic.userid_id %}
-            <td>{{ user.username }}</td>
+            <td style="text-align:center;">{{ user.username }}</td>
             {% endif %}
             {% endfor %}
-            <td>{{ topic.see_count }}</td>
+            <td style="text-align:center;">{{ topic.see_count }}</td>
         </tr>
         {% endfor %}
     </table>

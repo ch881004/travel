@@ -29,3 +29,12 @@ class IntroductionKeyWord(models.Model):
     titleid = models.ForeignKey(IntroductionInfo)
     keywords = models.CharField('文章关键字列表', max_length=50)
     is_show = models.BooleanField('显示', default=True)
+
+
+# 回复信息
+class IntroductionMessage(models.Model):
+    message = models.CharField(verbose_name='评论', max_length=500)
+    create_time = models.DateTimeField(verbose_name='评论时间', auto_now_add=True)
+    parent_id = models.IntegerField(verbose_name='评论id', default=0)
+    userid = models.ForeignKey(UserProfile)
+    topicid = models.ForeignKey(IntroductionInfo)

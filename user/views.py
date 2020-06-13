@@ -13,11 +13,12 @@ def register(request):
         usertype = request.POST.get('usertype')
         UserProfile.objects.create(username=username, password=password, usertype=usertype)
         # token = make_token(username)
-        # result = {'code': 200, 'token': token.decode()}
+        # result = {'code': 200, 'token': token.decode(), 'username': username}
         html = """注册成功!<a href='login'>登录</a>"""
         resp = HttpResponse(html)
         # resp.set_cookie('username', username)
         request.session['username'] = username
+        # return render(request, 'login.html', result)
         return resp
 
 
@@ -34,14 +35,20 @@ def login(request):
         if user.password == password:
             html = """登录成功!<div><a href='/v1/topics/{}'>我的游记</a></div>""".format(username)
             html += """<div><a href='/v1/topics'>全部游记</a></div>"""
+            html += """<div><a href='/v1/topics/{}/add'>发布游记</a></div>""".format(username)
             resp = HttpResponse(html)
             # resp.set_cookie('username', username)
             request.session['username'] = username
             # token = make_token(username)
-            # result = {'code': 200, 'token': token.decode()}
+            # result = {'code': 200, 'token': token.decode(), 'username': username}
             return resp
         else:
             return HttpResponse('密码错误')
+
+
+def logout(request):
+    del request.session['username']
+    return render(request, 'index.html', locals())
 
 
 def make_token(username, expire=3600 * 24):

@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>修改游记</title>
+    <title>修改攻略</title>
 </head>
 <body>
+    <a href="/">主页</a>
+    <hr>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
-            游记标题:<input type="text" name="title" value="{{ topic.title }}">
+            攻略标题:<input type="text" name="title" value="{{ topic.title }}">
         </div>
         <div>
-            搜索关键词:<input type="text" name="keywords" value="{{ t_kw.keywords }}">
+            搜索内容:<input type="text" name="keywords" value="{{ t_kw.keywords }}">
         </div>
         <div>
             地理位置:<input type="text" name="location" value="{{ topic.location }}">
         </div>
         <div>
-            游记内容: <textarea name="info" cols="60" rows="20">{{ topic.info }}</textarea>
+            <label for="info" style="float:left;">攻略内容:</label>
+             <textarea id="info" name="info" cols="60" rows="20">{{ topic.info }}</textarea>
         </div>
         <div>
-            游记图片:<input type="file" name="image" value="{{ topic.image }}">
+            上传图片:<input type="file" name="image" value="{{ topic.image }}">
         </div>
         <div>
             <button type="submit">发布</button>

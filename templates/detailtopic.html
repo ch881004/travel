@@ -5,8 +5,10 @@
     <title>攻略详情</title>
 </head>
 <body>
+    <a href="/">主页</a>
+    <hr>
     <div>
-<!--        游记标题-->
+<!--        攻略标题-->
         <h2>{{ topic.title }}</h2>
     </div>
     <div>
@@ -17,7 +19,7 @@
         <img style="width: 1000px;height: 200px;" src="/media/{{ topic.image }}" alt="{{ topic.image }}">
     </div>
     <div>
-<!--        游记内容-->
+<!--        攻略内容-->
         <p>{{ topic.info }}</p>
     </div>
 
@@ -43,5 +45,76 @@
             {% endif %}
         {% endif %}
     </div>
+
+    <hr>
+
+        <form action="message/{{ topic.id }}" method="post">
+            {% csrf_token %}
+            <div style="width:1000px;">
+                <textarea name="message" cols="30" rows="10" placeholder="发表评论"
+                          style="width:1000px;height:100px;"></textarea>
+                <input type="hidden" value="0" name="reply">
+                <button style="float:right;" type="submit">发表</button>
+            </div>
+        </form>
+
+
+    <div style="margin:80px 0 0 0;">
+        <h3>全部评论</h3>
+    </div>
+
+
+        {% for message in messages %}
+        <div style="width:960px;border: solid 0px #ccc;margin:5px 20px 5px 0;padding:5px;">
+            <p >
+                {{ message.id }}楼&nbsp;{{ message.userid.username }}&nbsp;评论&nbsp;{{ message.create_time }}
+            </p>
+            <p style="height:0px">
+                {{ message.message }}
+            </p>
+
+
+            {% for reply_message in reply_messages %}
+                {% if reply_message.parent_id == message.id %}
+                <ul style="width:930px;float:right;border: solid 0px #ccc;margin:5px 0 0 0;;">
+                    <p>
+                    {{ reply_message.userid.username }}&nbsp;回复&nbsp;{{ reply_message.create_time }}
+                    </p>
+                    <p>
+                        {{ reply_message.message }}
+                    </p>
+                </ul>
+                {% endif %}
+            {% endfor %}
+
+            <ul style="float:right;width:930px;">
+        <!--                <label for="{{ message.id }}" onclick="reply()">回复</label>-->
+                <form action="message/{{ topic.id }}" method="post">
+                    {% csrf_token %}
+
+<!--                    <input id="reply" type="text" placeholder="有什么想说的吗" name="reply_message">-->
+
+                    <textarea style="float:right;width:928px;" id="reply" name="reply_message" cols="10" rows="5"
+                              placeholder="有什么想说的吗"></textarea>
+
+                    <button style="float:right;" type="submit">回复</button>
+                    <input style="width:930px;" type="hidden" value="{{ message.id }}" name="reply">
+                </form>
+            </ul>
+        </div>
+        {% endfor %}
+
+    <script>
+        function reply(){
+           //var id={{ message.id }}
+           var  show=document.getElementById("reply").style.display;
+           if (show=='none'){
+                document.getElementById("reply").style.display='block';
+                }else{
+                document.getElementById("reply".style.display='none';
+                }
+        }
+    </script>
+
 </body>
 </html>
